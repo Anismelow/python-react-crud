@@ -23,8 +23,7 @@ def index():
 def create_user():
     result = db.insert_one(
         {
-            "site": request.json["site"],
-            "username": request.json["username"],
+            "name": request.json["name"],
             "email": request.json["email"],
             "password": request.json["password"],
         }
@@ -42,8 +41,7 @@ def get_users():
         users.append(
             {
                 "_id": str(ObjectId(doc["_id"])),
-                "site": doc["site"],
-                "username": doc["username"],
+                "name": doc["name"],
                 "email": doc["email"],
                 "password": doc["password"],
             }
@@ -58,8 +56,8 @@ def get_user(id):
     return jsonify(
         {
             "_id": str(ObjectId(user["_id"])),
-            "site": user["site"],
-            "username": user["username"],
+            
+            "name": user["name"],
             "email": user["email"],
             "password": user["password"],
         }
@@ -80,8 +78,8 @@ def update_user(id):
     print(id)
     print(request.json)
     db.update_one({'_id':ObjectId(id)}, {'$set':{
-        'site': request.json['site'],
-        "username": request.json['username'],
+        
+        "name": request.json['name'],
         'email':request.json['email'],
         'password':request.json['password']
     }})
